@@ -15,7 +15,7 @@ namespace TodoList_Project
         public override string ToString()
         {
             // 三元運算子
-            string status = IsCompleted ? "(完成)" : "";
+            string status = IsCompleted ? "(v)" : "";
             string time = CreatedAt.ToString();
 
             return $"{status}{Id}.({time}) - {Title}";

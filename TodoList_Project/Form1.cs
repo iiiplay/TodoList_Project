@@ -40,13 +40,53 @@ namespace TodoList_Project
             Console.WriteLine(index);
         }
 
-
-
-
-
         private void btnToggle_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(lstTodos.SelectedIndex);
+            int index = lstTodos.SelectedIndex;
+            if (index == -1)
+            {
+                return;
+            }
+
+            // 選取到物件
+            TodoItem todo = todos[index];
+            // !=>not 相反
+            todo.IsCompleted = !todo.IsCompleted;
+            lstTodos.Items[index] = todo;
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int index = lstTodos.SelectedIndex;
+            if (index == -1)
+            {
+                return;
+            }
+
+            todos.RemoveAt(index);
+            RefreshTodoList();
+
+            //lstTodos.Items.RemoveAt(index);
+        }
+
+        private void RefreshTodoList()
+        {
+            //1.清空lstTodos
+            lstTodos.Items.Clear();
+
+            //2.循環todos，重新編號
+            for (int i = 0; i < todos.Count; i++)
+            {
+                todos[i].Id = i + 1;
+                lstTodos.Items.Add(todos[i]);
+            }
+
+            //3.自動選取第一個
+            if (todos.Count > 0)
+            {
+                lstTodos.SelectedIndex = 0;
+            }
+        }
+
     }
-} 
+}

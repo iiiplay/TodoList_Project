@@ -105,6 +105,7 @@
             btnDelete.TabIndex = 6;
             btnDelete.Text = "刪除";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnToggle
             // 
