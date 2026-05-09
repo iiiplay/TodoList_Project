@@ -36,6 +36,7 @@
             btnSave = new Button();
             btnDelete = new Button();
             btnToggle = new Button();
+            btnClear = new Button();
             SuspendLayout();
             // 
             // label1
@@ -85,6 +86,7 @@
             btnLoad.TabIndex = 4;
             btnLoad.Text = "讀取";
             btnLoad.UseVisualStyleBackColor = true;
+            btnLoad.Click += btnLoad_Click;
             // 
             // btnSave
             // 
@@ -95,6 +97,7 @@
             btnSave.TabIndex = 5;
             btnSave.Text = "儲存";
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
             // 
             // btnDelete
             // 
@@ -118,11 +121,24 @@
             btnToggle.UseVisualStyleBackColor = true;
             btnToggle.Click += btnToggle_Click;
             // 
+            // btnClear
+            // 
+            btnClear.Font = new Font("Microsoft JhengHei UI", 12F);
+            btnClear.ForeColor = Color.Red;
+            btnClear.Location = new Point(635, 369);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(106, 37);
+            btnClear.TabIndex = 8;
+            btnClear.Text = "清空";
+            btnClear.UseVisualStyleBackColor = true;
+            btnClear.Click += btnClear_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnClear);
             Controls.Add(btnToggle);
             Controls.Add(btnDelete);
             Controls.Add(btnSave);
@@ -148,5 +164,6 @@
         private Button btnSave;
         private Button btnDelete;
         private Button btnToggle;
+        private Button btnClear;
     }
 }

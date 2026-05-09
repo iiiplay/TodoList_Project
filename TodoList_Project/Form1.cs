@@ -3,7 +3,7 @@ namespace TodoList_Project
     public partial class Form1 : Form
     {
         private List<TodoItem> todos = new List<TodoItem>();
-
+        private string fileName = "todos.txt";
 
         public Form1()
         {
@@ -32,6 +32,8 @@ namespace TodoList_Project
 
             todos.Add(item);
             lstTodos.Items.Add(item);
+            // 清空輸入框
+            txtTitle.Text = string.Empty;
         }
 
         private void lstTodos_SelectedIndexChanged(object sender, EventArgs e)
@@ -88,5 +90,48 @@ namespace TodoList_Project
             }
         }
 
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("是否確定清空?!", "警告",
+                MessageBoxButtons.YesNo);
+            // 確定刪除
+            if (result == DialogResult.Yes)
+            {
+                todos.Clear();
+                lstTodos.Items.Clear();
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            List<string> lines = new List<string>();
+
+            foreach (TodoItem todo in todos)
+            {
+                lines.Add(todo.Save());
+            }
+
+            File.WriteAllLines(fileName, lines);
+            MessageBox.Show($"儲存{fileName}成功!", "訊息");
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            //清空集合
+            todos.Clear();
+            lstTodos.Items.Clear();
+
+            //讀取文字檔
+            string[] lines = File.ReadAllLines("todos.txt");
+            //進行轉換
+            foreach(string line in lines)
+            {
+                TodoItem todo = new TodoItem();
+                todos.Add(todo.Load(line));
+            }
+            //更新listbox
+            RefreshTodoList();
+            MessageBox.Show($"共讀取{todos.Count}筆資料", "訊息");
+        }
     }
 }
